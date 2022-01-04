@@ -3,8 +3,12 @@
   "description": "Build and manage the fast-json-stringify instances for the fastify framework",
   "version": "1.0.0",
   "main": "index.js",
+  "types": "index.d.ts",
   "scripts": {
-    "test": "tap test/*.js"
+    "lint:fix": "standard --fix",
+    "unit": "tap --100 test/**/*.test.js",
+    "test": "standard && npm run unit && npm run test:typescript",
+    "test:typescript": "tsd"
   },
   "repository": {
     "type": "git",
@@ -20,9 +24,13 @@
   "devDependencies": {
     "fastify": "^3.25.3",
     "standard": "^16.0.4",
-    "tap": "^15.1.6"
+    "tap": "^15.1.6",
+    "tsd": "^0.19.1"
   },
   "dependencies": {
     "fast-json-stringify": "^3.0.0"
+  },
+  "tsd": {
+    "directory": "test/types"
   }
 }
