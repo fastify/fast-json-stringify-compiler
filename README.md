@@ -8,10 +8,10 @@ This package is responsible for compiling the application's `response` JSON sche
 
 ## Versions
 
-| `@fastify/fast-json-stringify-compiler` | `fast-json-stringify` |  Supported `fastify` |
-|----------------------------------------:|----------------------:|---------------------:|
-|                                    v1.x |                  v3.x |                 ^3.x |
-|                                    v2.x |                  v3.x |                 ^4.x |
+| `@fastify/fast-json-stringify-compiler` | `fast-json-stringify` | Supported `fastify` |
+|----------------------------------------:|----------------------:|--------------------:|
+|                                    v1.x |                  v3.x |                ^3.x |
+|                                    v2.x |                  v3.x |                ^4.x |
 
 ### fast-json-stringify Configuration
 
