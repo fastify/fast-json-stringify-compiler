@@ -2,7 +2,6 @@
 
 const t = require('tap')
 const fastify = require('fastify')
-const fastifyV3 = require('fastify-v3')
 const FjsCompiler = require('../index')
 
 const echo = async (req, reply) => { return req.body }
@@ -39,10 +38,7 @@ t.test('basic usage', t => {
   t.equal(result, '{"name":"hello"}')
 })
 
-t.test('fastify integration', testFastifyApp.bind(null, fastify))
-t.test('fastify v3 integration', testFastifyApp.bind(null, fastifyV3))
-
-async function testFastifyApp (fastify, t) {
+t.test('fastify integration', async t => {
   const factory = FjsCompiler()
 
   const app = fastify({
@@ -81,4 +77,4 @@ async function testFastifyApp (fastify, t) {
 
   t.equal(res.statusCode, 200)
   t.same(res.json(), { name: 'serialize me' })
-}
+})
