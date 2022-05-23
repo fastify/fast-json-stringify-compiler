@@ -22,7 +22,7 @@
   },
   "homepage": "https://github.com/fastify/fast-json-stringify-compiler#readme",
   "devDependencies": {
-    "fastify": "^3.25.3",
+    "fastify": "^4.0.0-rc.2",
     "standard": "^17.0.0",
     "tap": "^16.0.0",
     "tsd": "^0.20.0"
