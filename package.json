@@ -28,7 +28,7 @@
     "tsd": "^0.20.0"
   },
   "dependencies": {
-    "fast-json-stringify": "^3.0.0"
+    "fast-json-stringify": "^4.0.0"
   },
   "tsd": {
     "directory": "test/types"
