@@ -10,7 +10,7 @@ function SerializerSelector () {
 }
 
 function responseSchemaCompiler (fjsOpts, { schema /* method, url, httpStatus */ }) {
-  if (fjsOpts.schema && schema.$id) {
+  if (fjsOpts.schema && schema.$id && fjsOpts.schema[schema.$id]) {
     fjsOpts.schema = { ...fjsOpts.schema }
     delete fjsOpts.schema[schema.$id]
   }
