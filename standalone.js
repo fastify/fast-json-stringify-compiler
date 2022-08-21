@@ -2,7 +2,7 @@
 
 const SerializerSelector = require('./index')
 
-function StandaloneValidator (options = { readMode: true }) {
+function StandaloneSerializer (options = { readMode: true }) {
   if (options.readMode === true && !options.restoreFunction) {
     throw new Error('You must provide a restoreFunction options when readMode ON')
   }
@@ -40,4 +40,4 @@ function StandaloneValidator (options = { readMode: true }) {
   }
 }
 
-module.exports = StandaloneValidator
+module.exports = StandaloneSerializer

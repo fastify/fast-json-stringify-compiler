@@ -58,11 +58,11 @@ t.test('generate standalone code', t => {
 
   const factory = FjsStandaloneCompiler({
     readMode: false,
-    storeFunction (routeOpts, schemaValidationCode) {
+    storeFunction (routeOpts, schemaSerializerCode) {
       t.same(routeOpts, endpointSchema)
-      t.type(schemaValidationCode, 'string')
-      fs.writeFileSync(path.join(__dirname, '/fjs-generated.js'), schemaValidationCode)
-      t.pass('stored the validation function')
+      t.type(schemaSerializerCode, 'string')
+      fs.writeFileSync(path.join(__dirname, '/fjs-generated.js'), schemaSerializerCode)
+      t.pass('stored the serializer function')
     }
   })
 
@@ -92,7 +92,7 @@ t.test('fastify integration - writeMode', async t => {
       const fileName = generateFileName(routeOpts)
       t.ok(routeOpts)
       fs.writeFileSync(path.join(__dirname, fileName), schemaSerializationCode)
-      t.pass(`stored the validation function ${fileName}`)
+      t.pass(`stored the serializer function ${fileName}`)
     },
     restoreFunction () {
       t.fail('write mode ON')
@@ -112,7 +112,7 @@ t.test('fastify integration - writeMode forces standalone', async t => {
       const fileName = generateFileName(routeOpts)
       t.ok(routeOpts)
       fs.writeFileSync(path.join(__dirname, fileName), schemaSerializationCode)
-      t.pass(`stored the validation function ${fileName}`)
+      t.pass(`stored the serializer function ${fileName}`)
     },
     restoreFunction () {
       t.fail('write mode ON')
@@ -137,7 +137,7 @@ t.test('fastify integration - readMode', async t => {
     },
     restoreFunction (routeOpts) {
       const fileName = generateFileName(routeOpts)
-      t.pass(`restore the validation function ${fileName}}`)
+      t.pass(`restore the serializer function ${fileName}}`)
       return require(path.join(__dirname, fileName))
     }
   })
