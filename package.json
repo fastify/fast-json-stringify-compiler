@@ -5,9 +5,11 @@
   "main": "index.js",
   "types": "index.d.ts",
   "scripts": {
+    "lint": "standard",
     "lint:fix": "standard --fix",
-    "unit": "tap --100 test/**/*.test.js",
-    "test": "standard && npm run unit && npm run test:typescript",
+    "unit": "tap test/**/*.test.js",
+    "test": "npm run unit && npm run test:typescript",
+    "posttest": "rm test/fjs-generated*.js",
     "test:typescript": "tsd"
   },
   "repository": {

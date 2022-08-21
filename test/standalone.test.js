@@ -103,6 +103,30 @@ t.test('fastify integration - writeMode', async t => {
   await app.ready()
 })
 
+t.test('fastify integration - writeMode forces standalone', async t => {
+  t.plan(4)
+
+  const factory = FjsStandaloneCompiler({
+    readMode: false,
+    storeFunction (routeOpts, schemaSerializationCode) {
+      const fileName = generateFileName(routeOpts)
+      t.ok(routeOpts)
+      fs.writeFileSync(path.join(__dirname, fileName), schemaSerializationCode)
+      t.pass(`stored the validation function ${fileName}`)
+    },
+    restoreFunction () {
+      t.fail('write mode ON')
+    }
+  })
+
+  const app = buildApp(factory, {
+    mode: 'not-standalone',
+    rounding: 'ceil'
+  })
+
+  await app.ready()
+})
+
 t.test('fastify integration - readMode', async t => {
   t.plan(6)
 
@@ -136,7 +160,7 @@ t.test('fastify integration - readMode', async t => {
   t.equal(res.payload, JSON.stringify({ lang: 'en' }))
 })
 
-function buildApp (factory) {
+function buildApp (factory, serializerOpts) {
   const app = fastify({
     exposeHeadRoutes: false,
     jsonShorthand: false,
@@ -144,7 +168,8 @@ function buildApp (factory) {
       compilersFactory: {
         buildSerializer: factory
       }
-    }
+    },
+    serializerOpts
   })
 
   app.addSchema({
