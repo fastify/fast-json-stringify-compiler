@@ -25,9 +25,7 @@ const externalSchemas2 = Object.freeze({
   }
 })
 
-const fastifyFjsOptionsDefault = Object.freeze({
-  customOptions: {}
-})
+const fastifyFjsOptionsDefault = Object.freeze({})
 
 t.test('basic usage', t => {
   t.plan(1)
