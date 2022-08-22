@@ -3,12 +3,12 @@
 const SerializerSelector = require('./index')
 
 function StandaloneSerializer (options = { readMode: true }) {
-  if (options.readMode === true && !options.restoreFunction) {
-    throw new Error('You must provide a restoreFunction options when readMode ON')
+  if (options.readMode === true && typeof options.restoreFunction !== 'function') {
+    throw new Error('You must provide a function for the restoreFunction-option when readMode ON')
   }
 
   if (options.readMode !== true && !options.storeFunction) {
-    throw new Error('You must provide a storeFunction options when readMode OFF')
+    throw new Error('You must provide a function for the restoreFunction-option when readMode OFF')
   }
 
   if (options.readMode === true) {
