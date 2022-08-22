@@ -7,8 +7,8 @@ function StandaloneSerializer (options = { readMode: true }) {
     throw new Error('You must provide a function for the restoreFunction-option when readMode ON')
   }
 
-  if (options.readMode !== true && !options.storeFunction) {
-    throw new Error('You must provide a function for the restoreFunction-option when readMode OFF')
+  if (options.readMode !== true && typeof options.storeFunction !== 'function') {
+    throw new Error('You must provide a function for the storeFunction-option when readMode OFF')
   }
 
   if (options.readMode === true) {
