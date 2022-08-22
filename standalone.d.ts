@@ -1,4 +1,4 @@
-import { SerializerCompiler } from './index'
+import { SerializerCompiler } from '.'
 
 export type RouteDefinition = {
   method: string,
@@ -7,10 +7,11 @@ export type RouteDefinition = {
   schema?: unknown,
 }
 
-interface Option {
+export interface Options {
   readMode: Boolean,
   storeFunction?(opts: RouteDefinition, schemaSerializationCode: string): void,
   restoreFunction?(opts: RouteDefinition): void,
 }
 
-export declare function StandaloneSerializer(Options): SerializerCompiler;
+export function StandaloneSerializer(options: Options): SerializerCompiler;
+export default StandaloneSerializer

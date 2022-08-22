@@ -39,3 +39,5 @@ function StandaloneSerializer (options = { readMode: true }) {
 }
 
 module.exports = StandaloneSerializer
+module.exports.default = StandaloneSerializer
+module.exports.StandaloneSerializer = StandaloneSerializer
