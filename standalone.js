@@ -23,10 +23,8 @@ function StandaloneSerializer (options = { readMode: true }) {
   // WRITE MODE: it behalf on the default SerializerSelector, wrapping the API to run the Ajv Standalone code generation
   const factory = SerializerSelector()
   return function wrapper (externalSchemas, serializerOpts = {}) {
-    if (!serializerOpts.mode || serializerOpts.mode !== 'standalone') {
-      // to generate the serialization source code, these options are mandatory
-      serializerOpts.mode = 'standalone'
-    }
+    // to generate the serialization source code, this option is mandatory
+    serializerOpts.mode = 'standalone'
 
     const compiler = factory(externalSchemas, serializerOpts)
     return function (opts) { // { schema/*, method, url, httpPart */ }
