@@ -19,4 +19,3 @@ function responseSchemaCompiler (fjsOpts, { schema /* method, url, httpStatus */
 
 module.exports = SerializerSelector
 module.exports.default = SerializerSelector
-module.exports.SerializerSelector = SerializerSelector
