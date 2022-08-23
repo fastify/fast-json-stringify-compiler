@@ -5,9 +5,11 @@
   "main": "index.js",
   "types": "index.d.ts",
   "scripts": {
+    "lint": "standard",
     "lint:fix": "standard --fix",
-    "unit": "tap --100 test/**/*.test.js",
-    "test": "standard && npm run unit && npm run test:typescript",
+    "unit": "tap test/**/*.test.js",
+    "test": "npm run unit && npm run test:typescript",
+    "posttest": "rimraf test/fjs-generated*.js",
     "test:typescript": "tsd"
   },
   "repository": {
@@ -23,6 +25,8 @@
   "homepage": "https://github.com/fastify/fast-json-stringify-compiler#readme",
   "devDependencies": {
     "fastify": "^4.0.0",
+    "rimraf": "^3.0.2",
+    "sanitize-filename": "^1.6.3",
     "standard": "^17.0.0",
     "tap": "^16.0.0",
     "tsd": "^0.22.0"
