@@ -50,7 +50,9 @@ When `readMode: false`, **the compiler is meant to be used in development ONLY**
 
 
 ```js
-const factory = require('@fastify/fast-json-stringify-compiler/standalone')({
+const { StandaloneSerializer } = require('@fastify/fast-json-stringify-compiler')
+
+const factory = StandaloneSerializer({
   readMode: false,
   storeFunction (routeOpts, schemaSerializationCode) {
     // routeOpts is like: { schema, method, url, httpStatus }
@@ -91,7 +93,9 @@ Important keep away before you continue reading the documentation:
 - as you can see, you must relate the route's schema to the file name using the `routeOpts` object. You may use the `routeOpts.schema.$id` field to do so, it is up to you to define a unique schema identifier.
 
 ```js
-const factory = require('@fastify/fast-json-stringify-compiler/standalone')({
+const { StandaloneSerializer } = require('@fastify/fast-json-stringify-compiler')
+
+const factory = StandaloneSerializer({
   readMode: true,
   restoreFunction (routeOpts) {
     // routeOpts is like: { schema, method, url, httpStatus }

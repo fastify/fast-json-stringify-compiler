@@ -6,7 +6,7 @@ const t = require('tap')
 const fastify = require('fastify')
 const sanitize = require('sanitize-filename')
 
-const FjsStandaloneCompiler = require('../standalone')
+const { StandaloneSerializer: FjsStandaloneCompiler } = require('../')
 
 function generateFileName (routeOpts) {
   return `/fjs-generated-${sanitize(routeOpts.schema.$id)}-${routeOpts.method}-${routeOpts.httpPart}-${sanitize(routeOpts.url)}.js`
