@@ -106,6 +106,16 @@ expectType<SerializerFactory>(writer);
     readMode: false,
     restoreFunction () {}
   }))
+  expectError(StandaloneSerializer({
+    restoreFunction () {}
+  }))
+
+  expectType<SerializerFactory>(StandaloneSerializer({
+    storeFunction (routeOpts, schemaSerializerCode) {
+      expectType<RouteDefinition>(routeOpts)
+      expectType<string>(schemaSerializerCode)
+    }
+  }))
 
   expectType<SerializerFactory>(StandaloneSerializer({
     readMode: true,

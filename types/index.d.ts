@@ -30,7 +30,7 @@ declare namespace SerializerSelector {
   }
 
   export type StandaloneOptionsReadModeOff = {
-    readMode: false | undefined;
+    readMode?: false | undefined;
     storeFunction?(opts: RouteDefinition, schemaSerializationCode: string): void;
   }
 
