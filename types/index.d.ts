@@ -26,7 +26,7 @@ declare namespace SerializerSelector {
 
   export type StandaloneOptionsReadModeOn = {
     readMode: true;
-    restoreFunction?(opts: RouteDefinition): void;
+    restoreFunction?(opts: RouteDefinition): Serializer;
   }
 
   export type StandaloneOptionsReadModeOff = {

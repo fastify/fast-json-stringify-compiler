@@ -53,6 +53,7 @@ const reader = StandaloneSerializer({
   readMode: true,
   restoreFunction: (route: RouteDefinition) => {
     expectAssignable<RouteDefinition>(route)
+    return {} as Serializer
   },
 });
 expectType<SerializerFactory>(reader);
@@ -121,6 +122,7 @@ expectType<SerializerFactory>(writer);
     readMode: true,
     restoreFunction (routeOpts) {
       expectType<RouteDefinition>(routeOpts)
+      return {} as Serializer
     }
   }))
 
