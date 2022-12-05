@@ -22,7 +22,7 @@ declare namespace SerializerSelector {
   }
 
   export type { Options }
-  export function SerializerSelector(): FastJsonStringify;
+  export const SerializerSelector: FastJsonStringify;
   export function StandaloneSerializer(options: StandaloneOptions): SerializerCompiler;
 
   export { SerializerSelector as default }
