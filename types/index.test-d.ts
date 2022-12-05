@@ -1,7 +1,9 @@
-import { expectAssignable, expectType } from "tsd";
+import { expectAssignable, expectError, expectType } from "tsd";
 import SerializerSelector, {
   RouteDefinition,
+  Serializer,
   SerializerCompiler,
+  SerializerFactory,
   SerializerSelector as SerializerSelectorNamed,
   StandaloneSerializer,
 } from "..";
@@ -12,12 +14,35 @@ import SerializerSelector, {
 
 {
   const compiler = SerializerSelector();
-  expectType<SerializerCompiler>(compiler);
+  expectType<SerializerFactory>(compiler);
 }
 
 {
   const compiler = SerializerSelectorNamed();
-  expectType<SerializerCompiler>(compiler);
+  expectType<SerializerFactory>(compiler);
+}
+
+{
+  {
+    const sampleSchema = {
+      $id: 'example1',
+      type: 'object',
+      properties: {
+        name: { type: 'string' }
+      }
+    }
+
+    const externalSchemas1 = {}
+
+    const factory = SerializerSelector()
+    expectType<SerializerFactory>(factory);
+    const compiler = factory(externalSchemas1, {})
+    expectType<SerializerCompiler>(compiler);
+    const serializeFunc = compiler({ schema: sampleSchema })
+    expectType<Serializer>(serializeFunc);
+
+    expectType<string>(serializeFunc({ name: 'hello' }))
+  }
 }
 
 /**
@@ -30,7 +55,7 @@ const reader = StandaloneSerializer({
     expectAssignable<RouteDefinition>(route)
   },
 });
-expectType<SerializerCompiler>(reader);
+expectType<SerializerFactory>(reader);
 
 const writer = StandaloneSerializer({
   readMode: false,
@@ -39,4 +64,66 @@ const writer = StandaloneSerializer({
     expectAssignable<string>(code)
   },
 });
-expectType<SerializerCompiler>(writer);
+expectType<SerializerFactory>(writer);
+
+{
+  const base = {
+    $id: 'urn:schema:base',
+    definitions: {
+      hello: { type: 'string' }
+    },
+    type: 'object',
+    properties: {
+      hello: { $ref: '#/definitions/hello' }
+    }
+  }
+
+  const refSchema = {
+    $id: 'urn:schema:ref',
+    type: 'object',
+    properties: {
+      hello: { $ref: 'urn:schema:base#/definitions/hello' }
+    }
+  }
+
+  const endpointSchema = {
+    schema: {
+      $id: 'urn:schema:endpoint',
+      $ref: 'urn:schema:ref'
+    }
+  }
+
+  const schemaMap = {
+    [base.$id]: base,
+    [refSchema.$id]: refSchema
+  }
+
+  expectError(StandaloneSerializer({
+    readMode: true,
+    storeFunction () { }
+  }))
+  expectError(StandaloneSerializer({
+    readMode: false,
+    restoreFunction () {}
+  }))
+
+  expectType<SerializerFactory>(StandaloneSerializer({
+    readMode: true,
+    restoreFunction (routeOpts) {
+      expectType<RouteDefinition>(routeOpts)
+    }
+  }))
+
+  const factory = StandaloneSerializer({
+    readMode: false,
+    storeFunction (routeOpts, schemaSerializerCode) {
+      expectType<RouteDefinition>(routeOpts)
+      expectType<string>(schemaSerializerCode)
+    }
+  })
+  expectType<SerializerFactory>(factory)
+
+  const compiler = factory(schemaMap)
+  expectType<SerializerCompiler>(compiler)
+  expectType<Serializer>(compiler(endpointSchema))
+}
