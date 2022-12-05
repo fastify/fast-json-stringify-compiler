@@ -1,5 +1,7 @@
 import { Options } from 'fast-json-stringify'
 
+type FastJsonStringify = SerializerSelector.SerializerCompiler
+
 declare namespace SerializerSelector {
   export type SerializerCompiler = (
     externalSchemas: unknown,
@@ -20,10 +22,11 @@ declare namespace SerializerSelector {
   }
 
   export type { Options }
-  export function SerializerSelector(): SerializerCompiler;
+  export function SerializerSelector(): FastJsonStringify;
   export function StandaloneSerializer(options: StandaloneOptions): SerializerCompiler;
 
   export { SerializerSelector as default }
 }
 
+declare function SerializerSelector(): FastJsonStringify;
 export = SerializerSelector
