@@ -1,7 +1,28 @@
 import { expectAssignable, expectType } from "tsd";
+import SerializerSelector, {
+  RouteDefinition,
+  SerializerCompiler,
+  SerializerSelector as SerializerSelectorNamed,
+  StandaloneSerializer,
+} from "..";
 
-import { StandaloneSerializer, RouteDefinition } from "../../";
-import { SerializerCompiler } from "../..";
+/**
+ * SerializerSelector
+ */
+
+{
+  const compiler = SerializerSelector();
+  expectType<SerializerCompiler>(compiler);
+}
+
+{
+  const compiler = SerializerSelectorNamed();
+  expectType<SerializerCompiler>(compiler);
+}
+
+/**
+ * StandaloneSerializer
+ */
 
 const reader = StandaloneSerializer({
   readMode: true,
