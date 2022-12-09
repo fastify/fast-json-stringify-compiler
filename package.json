@@ -3,7 +3,7 @@
   "description": "Build and manage the fast-json-stringify instances for the fastify framework",
   "version": "4.1.0",
   "main": "index.js",
-  "types": "index.d.ts",
+  "types": "types/index.d.ts",
   "scripts": {
     "lint": "standard",
     "lint:fix": "standard --fix",
@@ -33,8 +33,5 @@
   },
   "dependencies": {
     "fast-json-stringify": "^5.0.0"
-  },
-  "tsd": {
-    "directory": "test/types"
   }
 }
