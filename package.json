@@ -35,6 +35,6 @@
     "test"
   ],
   "dependencies": {
-    "fast-json-stringify": "^5.0.0"
+    "fast-json-stringify": "^5.7.0"
   }
 }
