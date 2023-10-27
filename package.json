@@ -3,6 +3,7 @@
   "description": "Build and manage the fast-json-stringify instances for the fastify framework",
   "version": "4.3.0",
   "main": "index.js",
+  "type": "commonjs",
   "types": "types/index.d.ts",
   "scripts": {
     "lint": "standard",
