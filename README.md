@@ -19,12 +19,12 @@ This package is responsible for compiling the application's `response` JSON sche
 
 The `fast-json-stringify` configuration is the default one. You can check it the default settings in the [`fast-json-stringify` option](https://github.com/fastify/fast-json-stringify/#options) documentation.
 
-You can also override the default configuration by passing the [`serializerOpts`](https://www.fastify.io/docs/latest/Reference/Server/#serializeropts) configuration to the Fastify instance.
+You can also override the default configuration by passing the [`serializerOpts`](https://www.fastify.dev/docs/latest/Reference/Server/#serializeropts) configuration to the Fastify instance.
 
 ## Usage
 
 This module is already used as default by Fastify.
-If you need to provide to your server instance a different version, refer to [the official doc](https://www.fastify.io/docs/latest/Reference/Server/#schemacontroller).
+If you need to provide to your server instance a different version, refer to [the official doc](https://www.fastify.dev/docs/latest/Reference/Server/#schemacontroller).
 
 ### fast-json-stringify Standalone
 
@@ -120,7 +120,7 @@ app.listen({ port: 3000 })
 
 ### How it works
 
-This module provide a factory function to produce [Serializer Compilers](https://www.fastify.io/docs/latest/Reference/Server/#serializercompiler) functions.
+This module provide a factory function to produce [Serializer Compilers](https://www.fastify.dev/docs/latest/Reference/Server/#serializercompiler) functions.
 
 ## License
 
