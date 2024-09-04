@@ -1,7 +1,7 @@
 {
   "name": "@fastify/fast-json-stringify-compiler",
   "description": "Build and manage the fast-json-stringify instances for the fastify framework",
-  "version": "5.0.0-pre.fv5.1",
+  "version": "5.0.0",
   "main": "index.js",
   "type": "commonjs",
   "types": "types/index.d.ts",
@@ -25,7 +25,7 @@
   "homepage": "https://github.com/fastify/fast-json-stringify-compiler#readme",
   "devDependencies": {
     "@fastify/pre-commit": "^2.1.0",
-    "fastify": "^4.26.2",
+    "fastify": "^5.0.0-alpha.4",
     "sanitize-filename": "^1.6.3",
     "standard": "^17.1.0",
     "tap": "^18.7.2",
