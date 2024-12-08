@@ -34,11 +34,11 @@ import SerializerSelector, {
   const externalSchemas1 = {}
 
   const factory = SerializerSelector()
-  expectType<SerializerFactory>(factory);
+  expectType<SerializerFactory>(factory)
   const compiler = factory(externalSchemas1, {})
-  expectType<SerializerCompiler>(compiler);
-  const serializeFunc = compiler({ schema: sampleSchema, method: '', url:'', httpStatus: '' })
-  expectType<Serializer>(serializeFunc);
+  expectType<SerializerCompiler>(compiler)
+  const serializeFunc = compiler({ schema: sampleSchema, method: '', url: '', httpStatus: '' })
+  expectType<Serializer>(serializeFunc)
 
   expectType<string>(serializeFunc({ name: 'hello' }))
 }
