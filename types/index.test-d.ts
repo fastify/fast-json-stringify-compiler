@@ -23,26 +23,24 @@ import SerializerSelector, {
 }
 
 {
-  {
-    const sampleSchema = {
-      $id: 'example1',
-      type: 'object',
-      properties: {
-        name: { type: 'string' }
-      }
+  const sampleSchema = {
+    $id: 'example1',
+    type: 'object',
+    properties: {
+      name: { type: 'string' }
     }
-
-    const externalSchemas1 = {}
-
-    const factory = SerializerSelector()
-    expectType<SerializerFactory>(factory)
-    const compiler = factory(externalSchemas1, {})
-    expectType<SerializerCompiler>(compiler)
-    const serializeFunc = compiler({ schema: sampleSchema })
-    expectType<Serializer>(serializeFunc)
-
-    expectType<string>(serializeFunc({ name: 'hello' }))
   }
+
+  const externalSchemas1 = {}
+
+  const factory = SerializerSelector()
+  expectType<SerializerFactory>(factory)
+  const compiler = factory(externalSchemas1, {})
+  expectType<SerializerCompiler>(compiler)
+  const serializeFunc = compiler({ schema: sampleSchema })
+  expectType<Serializer>(serializeFunc)
+
+  expectType<string>(serializeFunc({ name: 'hello' }))
 }
 
 /**
