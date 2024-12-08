@@ -1,4 +1,4 @@
-import { expectAssignable, expectError, expectType } from "tsd";
+import { expectAssignable, expectError, expectType } from 'tsd'
 import SerializerSelector, {
   RouteDefinition,
   Serializer,
@@ -6,43 +6,41 @@ import SerializerSelector, {
   SerializerFactory,
   SerializerSelector as SerializerSelectorNamed,
   StandaloneSerializer,
-} from "..";
+} from '..'
 
 /**
  * SerializerSelector
  */
 
 {
-  const compiler = SerializerSelector();
-  expectType<SerializerFactory>(compiler);
+  const compiler = SerializerSelector()
+  expectType<SerializerFactory>(compiler)
 }
 
 {
-  const compiler = SerializerSelectorNamed();
-  expectType<SerializerFactory>(compiler);
+  const compiler = SerializerSelectorNamed()
+  expectType<SerializerFactory>(compiler)
 }
 
 {
-  {
-    const sampleSchema = {
-      $id: 'example1',
-      type: 'object',
-      properties: {
-        name: { type: 'string' }
-      }
+  const sampleSchema = {
+    $id: 'example1',
+    type: 'object',
+    properties: {
+      name: { type: 'string' }
     }
-
-    const externalSchemas1 = {}
-
-    const factory = SerializerSelector()
-    expectType<SerializerFactory>(factory);
-    const compiler = factory(externalSchemas1, {})
-    expectType<SerializerCompiler>(compiler);
-    const serializeFunc = compiler({ schema: sampleSchema })
-    expectType<Serializer>(serializeFunc);
-
-    expectType<string>(serializeFunc({ name: 'hello' }))
   }
+
+  const externalSchemas1 = {}
+
+  const factory = SerializerSelector()
+  expectType<SerializerFactory>(factory)
+  const compiler = factory(externalSchemas1, {})
+  expectType<SerializerCompiler>(compiler)
+  const serializeFunc = compiler({ schema: sampleSchema })
+  expectType<Serializer>(serializeFunc)
+
+  expectType<string>(serializeFunc({ name: 'hello' }))
 }
 
 /**
@@ -55,8 +53,8 @@ const reader = StandaloneSerializer({
     expectAssignable<RouteDefinition>(route)
     return {} as Serializer
   },
-});
-expectType<SerializerFactory>(reader);
+})
+expectType<SerializerFactory>(reader)
 
 const writer = StandaloneSerializer({
   readMode: false,
@@ -64,8 +62,8 @@ const writer = StandaloneSerializer({
     expectAssignable<RouteDefinition>(route)
     expectAssignable<string>(code)
   },
-});
-expectType<SerializerFactory>(writer);
+})
+expectType<SerializerFactory>(writer)
 
 {
   const base = {
