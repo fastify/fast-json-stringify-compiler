@@ -6,10 +6,9 @@ declare namespace SerializerSelector {
   export type SerializerFactory = (
     externalSchemas?: unknown,
     options?: Options
-  ) => SerializerCompiler;
+  ) => SerializerCompiler
 
   export type SerializerCompiler = (routeDef: RouteDefinition) => Serializer;
-
   export type Serializer = (doc: any) => string
 
   export type RouteDefinition = {
@@ -32,11 +31,11 @@ declare namespace SerializerSelector {
   }
 
   export type { Options }
-  export const SerializerSelector: FastJsonStringifyFactory;
-  export function StandaloneSerializer(options: StandaloneOptions): SerializerFactory;
+  export const SerializerSelector: FastJsonStringifyFactory
+  export function StandaloneSerializer (options: StandaloneOptions): SerializerFactory
 
   export { SerializerSelector as default }
 }
 
-declare function SerializerSelector(...params: Parameters<FastJsonStringifyFactory>): ReturnType<FastJsonStringifyFactory>
+declare function SerializerSelector (...params: Parameters<FastJsonStringifyFactory>): ReturnType<FastJsonStringifyFactory>
 export = SerializerSelector

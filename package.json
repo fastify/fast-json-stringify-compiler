@@ -1,13 +1,13 @@
 {
   "name": "@fastify/fast-json-stringify-compiler",
   "description": "Build and manage the fast-json-stringify instances for the fastify framework",
-  "version": "4.3.0",
+  "version": "5.0.1",
   "main": "index.js",
   "type": "commonjs",
   "types": "types/index.d.ts",
   "scripts": {
-    "lint": "standard",
-    "lint:fix": "standard --fix",
+    "lint": "eslint",
+    "lint:fix": "eslint --fix",
     "unit": "tap test/**/*.test.js",
     "test": "npm run unit && npm run test:typescript",
     "test:typescript": "tsd"
@@ -24,11 +24,11 @@
   },
   "homepage": "https://github.com/fastify/fast-json-stringify-compiler#readme",
   "devDependencies": {
-    "@fastify/pre-commit": "^2.0.2",
-    "fastify": "^4.0.0",
+    "@fastify/pre-commit": "^2.1.0",
+    "fastify": "^5.0.0",
+    "neostandard": "^0.11.9",
     "sanitize-filename": "^1.6.3",
-    "standard": "^17.0.0",
-    "tap": "^16.0.0",
+    "tap": "^18.7.2",
     "tsd": "^0.31.0"
   },
   "pre-commit": [
@@ -36,6 +36,6 @@
     "test"
   ],
   "dependencies": {
-    "fast-json-stringify": "^5.7.0"
+    "fast-json-stringify": "^6.0.0"
   }
 }
