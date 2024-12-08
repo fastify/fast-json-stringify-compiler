@@ -8,11 +8,7 @@ declare namespace SerializerSelector {
     options?: Options
   ) => SerializerCompiler
 
-  export type SerializerCompiler = (
-    externalSchemas?: unknown,
-    options?: Options
-  ) => Serializer
-
+  export type SerializerCompiler = (routeDef: RouteDefinition) => Serializer
   export type Serializer = (doc: any) => string
 
   export type RouteDefinition = {

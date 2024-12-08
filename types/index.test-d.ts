@@ -37,7 +37,7 @@ import SerializerSelector, {
   expectType<SerializerFactory>(factory)
   const compiler = factory(externalSchemas1, {})
   expectType<SerializerCompiler>(compiler)
-  const serializeFunc = compiler({ schema: sampleSchema })
+  const serializeFunc = compiler({ schema: sampleSchema, method: '', url: '', httpStatus: '' })
   expectType<Serializer>(serializeFunc)
 
   expectType<string>(serializeFunc({ name: 'hello' }))
@@ -86,6 +86,9 @@ expectType<SerializerFactory>(writer)
   }
 
   const endpointSchema = {
+    method: '',
+    url: '',
+    httpStatus: '',
     schema: {
       $id: 'urn:schema:endpoint',
       $ref: 'urn:schema:ref'
