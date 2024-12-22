@@ -18,11 +18,40 @@
   },
   "keywords": [],
   "author": "Manuel Spigolon <manuel.spigolon@nearform.com> (https://github.com/Eomm)",
+  "contributors": [
+    {
+      "name": "Matteo Collina",
+      "email": "hello@matteocollina.com"
+    },
+    {
+      "name": "Aras Abbasi",
+      "email": "aras.abbasi@gmail.com"
+    },
+    {
+      "name": "James Sumners",
+      "url": "https://james.sumners.info"
+    },
+    {
+      "name": "Frazer Smith",
+      "email": "frazer.dev@icloud.com",
+      "url": "https://github.com/fdawgs"
+    }
+  ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/fastify/fast-json-stringify-compiler/issues"
   },
   "homepage": "https://github.com/fastify/fast-json-stringify-compiler#readme",
+  "funding": [
+    {
+      "type": "github",
+      "url": "https://github.com/sponsors/fastify"
+    },
+    {
+      "type": "opencollective",
+      "url": "https://opencollective.com/fastify"
+    }
+  ],
   "devDependencies": {
     "@fastify/pre-commit": "^2.1.0",
     "eslint": "^9.17.0",
