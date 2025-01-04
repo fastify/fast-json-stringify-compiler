@@ -1,7 +1,7 @@
 {
   "name": "@fastify/fast-json-stringify-compiler",
   "description": "Build and manage the fast-json-stringify instances for the fastify framework",
-  "version": "5.0.1",
+  "version": "5.0.2",
   "main": "index.js",
   "type": "commonjs",
   "types": "types/index.d.ts",
