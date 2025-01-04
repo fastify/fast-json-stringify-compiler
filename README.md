@@ -1,10 +1,11 @@
 # @fastify/fast-json-stringify-compiler
-Build and manage the [`fast-json-stringify`](https://www.npmjs.com/package/fast-json-stringify) instances for the fastify framework.
-This package is responsible for compiling the application's `response` JSON schemas into optimized functions to speed up the response time.
 
-[![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat)](http://standardjs.com/)
 [![CI](https://github.com/fastify/fast-json-stringify-compiler/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/fastify/fast-json-stringify-compiler/actions/workflows/ci.yml)
+[![NPM version](https://img.shields.io/npm/v/@fastify/fast-json-stringify-compiler.svg?style=flat)](https://www.npmjs.com/package/@fastify/fast-json-stringify-compiler)
+[![neostandard javascript style](https://img.shields.io/badge/code_style-neostandard-brightgreen?style=flat)](https://github.com/neostandard/neostandard)
 
+Build and manage the [`fast-json-stringify`](https://www.npmjs.com/package/fast-json-stringify) instances for the Fastify framework.
+This package is responsible for compiling the application's `response` JSON schemas into optimized functions to speed up the response time.
 
 ## Versions
 
@@ -17,7 +18,7 @@ This package is responsible for compiling the application's `response` JSON sche
 
 ### fast-json-stringify Configuration
 
-The `fast-json-stringify` configuration is the default one. You can check it the default settings in the [`fast-json-stringify` option](https://github.com/fastify/fast-json-stringify/#options) documentation.
+The `fast-json-stringify` configuration is the default one. You can check the default settings in the [`fast-json-stringify` option](https://github.com/fastify/fast-json-stringify/#options) documentation.
 
 You can also override the default configuration by passing the [`serializerOpts`](https://fastify.dev/docs/latest/Reference/Server/#serializeropts) configuration to the Fastify instance.
 
@@ -28,7 +29,7 @@ If you need to provide to your server instance a different version, refer to [th
 
 ### fast-json-stringify Standalone
 
-`fast-json-stringify@v4.1.0` introduces the [standalone feature](https://github.com/fastify/fast-json-stringify#standalone) that let you to pre-compile your schemas and use them in your application for a faster startup.
+`fast-json-stringify@v4.1.0` introduces the [standalone feature](https://github.com/fastify/fast-json-stringify#standalone) that lets you pre-compile your schemas and use them in your application for a faster startup.
 
 To use this feature, you must be aware of the following:
 
@@ -43,7 +44,7 @@ To accomplish this, you must use a new compiler: `@fastify/fast-json-stringify-c
 
 You must provide 2 parameters to this compiler:
 
-- `readMode: false`: a boolean to indicate that you want generate the schemas functions string.
+- `readMode: false`: a boolean to indicate that you want to generate the schemas functions string.
 - `storeFunction`" a sync function that must store the source code of the schemas functions. You may provide an async function too, but you must manage errors.
 
 When `readMode: false`, **the compiler is meant to be used in development ONLY**.
@@ -84,7 +85,7 @@ app.ready().then(() => {
 At this stage, you should have a file for every route's schema.
 To use them, you must use the `@fastify/fast-json-stringify-compiler/standalone` with the parameters:
 
-- `readMode: true`: a boolean to indicate that you want read and use the schemas functions string.
+- `readMode: true`: a boolean to indicate that you want to read and use the schemas functions string.
 - `restoreFunction`" a sync function that must return a function to serialize the route's payload.
 
 Important keep away before you continue reading the documentation:
@@ -120,7 +121,7 @@ app.listen({ port: 3000 })
 
 ### How it works
 
-This module provide a factory function to produce [Serializer Compilers](https://fastify.dev/docs/latest/Reference/Server/#serializercompiler) functions.
+This module provides a factory function to produce [Serializer Compilers](https://fastify.dev/docs/latest/Reference/Server/#serializercompiler) functions.
 
 ## License
 
