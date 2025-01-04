@@ -23,7 +23,7 @@ t.test('standalone', t => {
     for (const fileName of generatedFileNames) {
       try {
         await fs.promises.unlink(path.join(__dirname, fileName))
-      } catch (e) {}
+      } catch {}
     }
   })
 

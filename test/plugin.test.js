@@ -4,7 +4,7 @@ const t = require('tap')
 const fastify = require('fastify')
 const FjsCompiler = require('../index')
 
-const echo = async (req, reply) => { return req.body }
+const echo = async (req) => { return req.body }
 
 const sampleSchema = Object.freeze({
   $id: 'example1',
