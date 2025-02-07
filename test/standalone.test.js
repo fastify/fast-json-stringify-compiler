@@ -2,7 +2,7 @@
 
 const fs = require('node:fs')
 const path = require('node:path')
-const t = require('tap')
+const { test } = require('node:test')
 const fastify = require('fastify')
 const sanitize = require('sanitize-filename')
 
@@ -16,10 +16,10 @@ function generateFileName (routeOpts) {
   return fileName
 }
 
-t.test('standalone', t => {
+test('standalone', async t => {
   t.plan(5)
 
-  t.teardown(async () => {
+  t.after(async () => {
     for (const fileName of generatedFileNames) {
       try {
         await fs.promises.unlink(path.join(__dirname, fileName))
@@ -29,10 +29,10 @@ t.test('standalone', t => {
 
   t.test('errors', t => {
     t.plan(2)
-    t.throws(() => {
+    t.assert.throws(() => {
       FjsStandaloneCompiler()
     }, 'missing restoreFunction')
-    t.throws(() => {
+    t.assert.throws(() => {
       FjsStandaloneCompiler({ readMode: false })
     }, 'missing storeFunction')
   })
@@ -74,28 +74,28 @@ t.test('standalone', t => {
     const factory = FjsStandaloneCompiler({
       readMode: false,
       storeFunction (routeOpts, schemaSerializerCode) {
-        t.same(routeOpts, endpointSchema)
-        t.type(schemaSerializerCode, 'string')
+        t.assert.deepStrictEqual(routeOpts, endpointSchema)
+        t.assert.ok(typeof schemaSerializerCode === 'string')
         fs.writeFileSync(path.join(__dirname, '/fjs-generated.js'), schemaSerializerCode)
         generatedFileNames.push('/fjs-generated.js')
-        t.pass('stored the serializer function')
+        t.assert.ok('stored the serializer function')
       }
     })
 
     const compiler = factory(schemaMap)
     compiler(endpointSchema)
-    t.pass('compiled the endpoint schema')
+    t.assert.ok('compiled the endpoint schema')
 
     t.test('usage standalone code', t => {
       t.plan(3)
       const standaloneSerializer = require('./fjs-generated')
-      t.ok(standaloneSerializer)
+      t.assert.ok(standaloneSerializer)
 
       const valid = standaloneSerializer({ hello: 'world' })
-      t.same(valid, JSON.stringify({ hello: 'world' }))
+      t.assert.deepStrictEqual(valid, JSON.stringify({ hello: 'world' }))
 
       const invalid = standaloneSerializer({ hello: [] })
-      t.same(invalid, '{"hello":""}')
+      t.assert.deepStrictEqual(invalid, '{"hello":""}')
     })
   })
 
@@ -106,9 +106,9 @@ t.test('standalone', t => {
       readMode: false,
       storeFunction (routeOpts, schemaSerializationCode) {
         const fileName = generateFileName(routeOpts)
-        t.ok(routeOpts)
+        t.assert.ok(routeOpts)
         fs.writeFileSync(path.join(__dirname, fileName), schemaSerializationCode)
-        t.pass(`stored the serializer function ${fileName}`)
+        t.assert.ok(`stored the serializer function ${fileName}`)
       },
       restoreFunction () {
         t.fail('write mode ON')
@@ -119,16 +119,16 @@ t.test('standalone', t => {
     await app.ready()
   })
 
-  t.test('fastify integration - writeMode forces standalone', async t => {
+  await t.test('fastify integration - writeMode forces standalone', async t => {
     t.plan(4)
 
     const factory = FjsStandaloneCompiler({
       readMode: false,
       storeFunction (routeOpts, schemaSerializationCode) {
         const fileName = generateFileName(routeOpts)
-        t.ok(routeOpts)
+        t.assert.ok(routeOpts)
         fs.writeFileSync(path.join(__dirname, fileName), schemaSerializationCode)
-        t.pass(`stored the serializer function ${fileName}`)
+        t.assert.ok(`stored the serializer function ${fileName}`)
       },
       restoreFunction () {
         t.fail('write mode ON')
@@ -143,7 +143,7 @@ t.test('standalone', t => {
     await app.ready()
   })
 
-  t.test('fastify integration - readMode', async t => {
+  await t.test('fastify integration - readMode', async t => {
     t.plan(6)
 
     const factory = FjsStandaloneCompiler({
@@ -153,7 +153,7 @@ t.test('standalone', t => {
       },
       restoreFunction (routeOpts) {
         const fileName = generateFileName(routeOpts)
-        t.pass(`restore the serializer function ${fileName}}`)
+        t.assert.ok(`restore the serializer function ${fileName}}`)
         return require(path.join(__dirname, fileName))
       }
     })
@@ -165,15 +165,15 @@ t.test('standalone', t => {
       url: '/foo',
       method: 'POST'
     })
-    t.equal(res.statusCode, 200)
-    t.equal(res.payload, JSON.stringify({ hello: 'world' }))
+    t.assert.equal(res.statusCode, 200)
+    t.assert.equal(res.payload, JSON.stringify({ hello: 'world' }))
 
     res = await app.inject({
       url: '/bar?lang=it',
       method: 'GET'
     })
-    t.equal(res.statusCode, 200)
-    t.equal(res.payload, JSON.stringify({ lang: 'en' }))
+    t.assert.equal(res.statusCode, 200)
+    t.assert.equal(res.payload, JSON.stringify({ lang: 'en' }))
   })
 
   function buildApp (factory, serializerOpts) {
