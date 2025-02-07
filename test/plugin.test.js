@@ -1,6 +1,6 @@
 'use strict'
 
-const t = require('tap')
+const { test } = require('node:test')
 const fastify = require('fastify')
 const FjsCompiler = require('../index')
 
@@ -27,16 +27,16 @@ const externalSchemas2 = Object.freeze({
 
 const fastifyFjsOptionsDefault = Object.freeze({})
 
-t.test('basic usage', t => {
+test('basic usage', t => {
   t.plan(1)
   const factory = FjsCompiler()
   const compiler = factory(externalSchemas1, fastifyFjsOptionsDefault)
   const serializeFunc = compiler({ schema: sampleSchema })
   const result = serializeFunc({ name: 'hello' })
-  t.equal(result, '{"name":"hello"}')
+  t.assert.equal(result, '{"name":"hello"}')
 })
 
-t.test('fastify integration', async t => {
+test('fastify integration', async t => {
   const factory = FjsCompiler()
 
   const app = fastify({
@@ -73,6 +73,6 @@ t.test('fastify integration', async t => {
     }
   })
 
-  t.equal(res.statusCode, 200)
-  t.same(res.json(), { name: 'serialize me' })
+  t.assert.equal(res.statusCode, 200)
+  t.assert.deepStrictEqual(res.json(), { name: 'serialize me' })
 })
