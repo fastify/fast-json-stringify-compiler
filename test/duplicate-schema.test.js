@@ -1,9 +1,9 @@
 'use strict'
 
-const t = require('tap')
+const { test } = require('node:test')
 const FjsCompiler = require('../index')
 
-t.test('Use input schema duplicate in the externalSchemas', async t => {
+test('Use input schema duplicate in the externalSchemas', async t => {
   t.plan(1)
   const externalSchemas = {
     schema1: {
@@ -22,5 +22,5 @@ t.test('Use input schema duplicate in the externalSchemas', async t => {
   compiler({ schema: externalSchemas.schema1 })
   compiler({ schema: externalSchemas.schema2 })
 
-  t.pass()
+  t.assert.ok(true)
 })
