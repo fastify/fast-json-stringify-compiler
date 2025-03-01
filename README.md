@@ -14,7 +14,7 @@ This package is responsible for compiling the application's `response` JSON sche
 |                                    v1.x |                  v3.x |                ^3.x |
 |                                    v2.x |                  v3.x |                ^4.x |
 |                                    v3.x |                  v4.x |                ^4.x |
-|                                    v4.x |                  v5.x |                ^4.x |
+|                                    v4.x |                  v5.x |                ^5.x |
 
 ### fast-json-stringify Configuration
 
