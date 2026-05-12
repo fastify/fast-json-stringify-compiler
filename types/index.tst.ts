@@ -49,8 +49,8 @@ import SerializerSelector, {
 
 const reader = StandaloneSerializer({
   readMode: true,
-  restoreFunction: (route: RouteDefinition) => {
-    expect(route).type.toBeAssignableTo<RouteDefinition>()
+  restoreFunction: (route) => {
+    expect(route).type.toBe<RouteDefinition>()
     return {} as Serializer
   },
 })
@@ -58,9 +58,9 @@ expect(reader).type.toBe<SerializerFactory>()
 
 const writer = StandaloneSerializer({
   readMode: false,
-  storeFunction: (route: RouteDefinition, code: string) => {
-    expect(route).type.toBeAssignableTo<RouteDefinition>()
-    expect(code).type.toBeAssignableTo<string>()
+  storeFunction: (route, code) => {
+    expect(route).type.toBe<RouteDefinition>()
+    expect(code).type.toBe<string>()
   },
 })
 expect(writer).type.toBe<SerializerFactory>()
