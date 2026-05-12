@@ -1,4 +1,4 @@
-import { expectAssignable, expectError, expectType } from 'tsd'
+import { expect } from 'tstyche'
 import SerializerSelector, {
   RouteDefinition,
   Serializer,
@@ -14,12 +14,12 @@ import SerializerSelector, {
 
 {
   const compiler = SerializerSelector()
-  expectType<SerializerFactory>(compiler)
+  expect(compiler).type.toBe<SerializerFactory>()
 }
 
 {
   const compiler = SerializerSelectorNamed()
-  expectType<SerializerFactory>(compiler)
+  expect(compiler).type.toBe<SerializerFactory>()
 }
 
 {
@@ -34,13 +34,13 @@ import SerializerSelector, {
   const externalSchemas1 = {}
 
   const factory = SerializerSelector()
-  expectType<SerializerFactory>(factory)
+  expect(factory).type.toBe<SerializerFactory>()
   const compiler = factory(externalSchemas1, {})
-  expectType<SerializerCompiler>(compiler)
+  expect(compiler).type.toBe<SerializerCompiler>()
   const serializeFunc = compiler({ schema: sampleSchema, method: '', url: '', httpStatus: '' })
-  expectType<Serializer>(serializeFunc)
+  expect(serializeFunc).type.toBe<Serializer>()
 
-  expectType<string>(serializeFunc({ name: 'hello' }))
+  expect(serializeFunc({ name: 'hello' })).type.toBe<string>()
 }
 
 /**
@@ -49,21 +49,21 @@ import SerializerSelector, {
 
 const reader = StandaloneSerializer({
   readMode: true,
-  restoreFunction: (route: RouteDefinition) => {
-    expectAssignable<RouteDefinition>(route)
+  restoreFunction: (route) => {
+    expect(route).type.toBe<RouteDefinition>()
     return {} as Serializer
   },
 })
-expectType<SerializerFactory>(reader)
+expect(reader).type.toBe<SerializerFactory>()
 
 const writer = StandaloneSerializer({
   readMode: false,
-  storeFunction: (route: RouteDefinition, code: string) => {
-    expectAssignable<RouteDefinition>(route)
-    expectAssignable<string>(code)
+  storeFunction: (route, code) => {
+    expect(route).type.toBe<RouteDefinition>()
+    expect(code).type.toBe<string>()
   },
 })
-expectType<SerializerFactory>(writer)
+expect(writer).type.toBe<SerializerFactory>()
 
 {
   const base = {
@@ -100,43 +100,45 @@ expectType<SerializerFactory>(writer)
     [refSchema.$id]: refSchema
   }
 
-  expectError(StandaloneSerializer({
+  expect(StandaloneSerializer).type.not.toBeCallableWith({
     readMode: true,
     storeFunction () { }
-  }))
-  expectError(StandaloneSerializer({
+  })
+
+  expect(StandaloneSerializer).type.not.toBeCallableWith({
     readMode: false,
     restoreFunction () {}
-  }))
-  expectError(StandaloneSerializer({
+  })
+
+  expect(StandaloneSerializer).type.not.toBeCallableWith({
     restoreFunction () {}
-  }))
+  })
 
-  expectType<SerializerFactory>(StandaloneSerializer({
+  expect(StandaloneSerializer({
     storeFunction (routeOpts, schemaSerializerCode) {
-      expectType<RouteDefinition>(routeOpts)
-      expectType<string>(schemaSerializerCode)
+      expect(routeOpts).type.toBe<RouteDefinition>()
+      expect(schemaSerializerCode).type.toBe<string>()
     }
-  }))
+  })).type.toBe<SerializerFactory>()
 
-  expectType<SerializerFactory>(StandaloneSerializer({
+  expect(StandaloneSerializer({
     readMode: true,
     restoreFunction (routeOpts) {
-      expectType<RouteDefinition>(routeOpts)
+      expect(routeOpts).type.toBe<RouteDefinition>()
       return {} as Serializer
     }
-  }))
+  })).type.toBe<SerializerFactory>()
 
   const factory = StandaloneSerializer({
     readMode: false,
     storeFunction (routeOpts, schemaSerializerCode) {
-      expectType<RouteDefinition>(routeOpts)
-      expectType<string>(schemaSerializerCode)
+      expect(routeOpts).type.toBe<RouteDefinition>()
+      expect(schemaSerializerCode).type.toBe<string>()
     }
   })
-  expectType<SerializerFactory>(factory)
+  expect(factory).type.toBe<SerializerFactory>()
 
   const compiler = factory(schemaMap)
-  expectType<SerializerCompiler>(compiler)
-  expectType<Serializer>(compiler(endpointSchema))
+  expect(compiler).type.toBe<SerializerCompiler>()
+  expect(compiler(endpointSchema)).type.toBe<Serializer>()
 }
