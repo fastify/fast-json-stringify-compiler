@@ -61,6 +61,6 @@
     "tstyche": "^7.1.0"
   },
   "dependencies": {
-    "fast-json-stringify": "^6.0.0"
+    "fast-json-stringify": "^7.0.0"
   }
 }
