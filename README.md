@@ -29,7 +29,7 @@ If you need to provide to your server instance a different version, refer to [th
 
 ### fast-json-stringify Standalone
 
-`fast-json-stringify@v4.1.0` introduces the [standalone feature](https://github.com/fastify/fast-json-stringify#standalone) that lets you pre-compile your schemas and use them in your application for a faster startup.
+`fast-json-stringify@v4.1.0` introduces the [standalone feature](https://github.com/fastify/fast-json-stringify#standalone-mode) that lets you pre-compile your schemas and use them in your application for a faster startup.
 
 To use this feature, you must be aware of the following:
 
