@@ -11,10 +11,11 @@ This package is responsible for compiling the application's `response` JSON sche
 
 | `@fastify/fast-json-stringify-compiler` | `fast-json-stringify` | Supported `fastify` |
 |----------------------------------------:|----------------------:|--------------------:|
-|                                    v1.x |                  v3.x |                ^3.x |
-|                                    v2.x |                  v3.x |                ^4.x |
-|                                    v3.x |                  v4.x |                ^4.x |
+|                                    v5.x |                v6-7.x |                ^5.x |
 |                                    v4.x |                  v5.x |                ^5.x |
+|                                    v3.x |                  v4.x |                ^4.x |
+|                                    v2.x |                  v3.x |                ^4.x |
+|                                    v1.x |                  v3.x |                ^3.x |
 
 ### fast-json-stringify Configuration
 
