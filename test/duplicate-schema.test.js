@@ -74,3 +74,11 @@ test('isolate caches between factory instances', t => {
 
   t.assert.notStrictEqual(first, second)
 })
+
+test('handle boolean schemas', t => {
+  const compiler = FjsCompiler()({})
+
+  const serializer = compiler({ schema: false })
+
+  t.assert.strictEqual(typeof serializer, 'function')
+})
