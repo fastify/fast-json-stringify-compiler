@@ -9,15 +9,21 @@ function SerializerSelector () {
 
     return function responseSchemaCompilerWithCache (opts) {
       const { schema } = opts
+      const isObject = typeof schema === 'object' && schema !== null
 
-      let serializer = cache.get(schema)
+      if (isObject) {
+        const serializer = cache.get(schema)
 
-      if (serializer !== undefined) {
-        return serializer
+        if (serializer !== undefined) {
+          return serializer
+        }
       }
 
-      serializer = responseSchemaCompiler(fjsOpts, opts)
-      cache.set(schema, serializer)
+      const serializer = responseSchemaCompiler(fjsOpts, opts)
+
+      if (isObject) {
+        cache.set(schema, serializer)
+      }
 
       return serializer
     }
