@@ -41,6 +41,10 @@ import SerializerSelector, {
   expect(serializeFunc).type.toBe<Serializer>()
 
   expect(serializeFunc({ name: 'hello' })).type.toBe<string>()
+
+  expect(factory({}, { objectMechanism: 'native' })).type.toBe<SerializerCompiler>()
+  expect(factory({}, { objectMechanism: 'default' })).type.toBe<SerializerCompiler>()
+  expect(factory).type.not.toBeCallableWith({}, { objectMechanism: 'not-a-mechanism' })
 }
 
 /**

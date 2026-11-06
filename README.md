@@ -23,6 +23,19 @@ The `fast-json-stringify` configuration is the default one. You can check the de
 
 You can also override the default configuration by passing the [`serializerOpts`](https://fastify.dev/docs/latest/Reference/Server/#serializeropts) configuration to the Fastify instance.
 
+#### `objectMechanism: 'native'`
+
+`fast-json-stringify@7.3.0` added the [`objectMechanism`](https://github.com/fastify/fast-json-stringify/#object-mechanism) option.
+With `'native'`, the serializer projects the payload into schema-shaped objects and delegates to `JSON.stringify`, so on Node.js 25+ V8 stays on its fast path while the response schema is still applied (undeclared properties stripped, coercions and formats as usual). The output is identical to the default mechanism, and the option is a no-op on Node.js < 25.
+
+```js
+const app = fastify({
+  serializerOpts: {
+    objectMechanism: 'native'
+  }
+})
+```
+
 ## Usage
 
 This module is already used as default by Fastify.
