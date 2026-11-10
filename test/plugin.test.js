@@ -36,6 +36,20 @@ test('basic usage', t => {
   t.assert.equal(result, '{"name":"hello"}')
 })
 
+test('cache hit for identical schemas across factories', t => {
+  t.plan(2)
+  const factory = FjsCompiler()
+
+  const compiler1 = factory(externalSchemas1, fastifyFjsOptionsDefault)
+  const compiler2 = factory(externalSchemas1, fastifyFjsOptionsDefault)
+
+  const serialize1 = compiler1({ schema: sampleSchema })
+  const serialize2 = compiler2({ schema: sampleSchema })
+
+  t.assert.equal(serialize1, serialize2, 'same serializer function returned from cache')
+  t.assert.equal(serialize1({ name: 'cached' }), '{"name":"cached"}')
+})
+
 test('fastify integration', async t => {
   const factory = FjsCompiler()
 

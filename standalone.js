@@ -3,9 +3,17 @@
 const fastJsonStringify = require('fast-json-stringify')
 
 function SerializerSelector () {
+  const cache = new Map()
   return function buildSerializerFactory (externalSchemas, serializerOpts) {
     const fjsOpts = Object.assign({}, serializerOpts, { schema: externalSchemas })
-    return responseSchemaCompiler.bind(null, fjsOpts)
+    return function cachedResponseSchemaCompiler (opts) {
+      const key = JSON.stringify(opts.schema)
+      const cached = cache.get(key)
+      if (cached) return cached
+      const result = responseSchemaCompiler(fjsOpts, opts)
+      cache.set(key, result)
+      return result
+    }
   }
 }
 
