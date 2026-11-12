@@ -24,3 +24,22 @@ test('Use input schema duplicate in the externalSchemas', async t => {
 
   t.assert.ok(true)
 })
+
+test('Keep the external schemas for later compilations', async t => {
+  t.plan(1)
+  const externalSchemas = {
+    schema1: {
+      $id: 'schema1',
+      type: 'object',
+      properties: { name: { type: 'string' } }
+    }
+  }
+
+  const factory = FjsCompiler()
+  const compiler = factory(externalSchemas)
+
+  compiler({ schema: externalSchemas.schema1 })
+  const serialize = compiler({ schema: { $ref: 'schema1#' } })
+
+  t.assert.equal(serialize({ name: 'a', secret: 1 }), '{"name":"a"}')
+})
