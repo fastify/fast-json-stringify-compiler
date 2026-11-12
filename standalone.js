@@ -5,7 +5,28 @@ const fastJsonStringify = require('fast-json-stringify')
 function SerializerSelector () {
   return function buildSerializerFactory (externalSchemas, serializerOpts) {
     const fjsOpts = Object.assign({}, serializerOpts, { schema: externalSchemas })
-    return responseSchemaCompiler.bind(null, fjsOpts)
+    const cache = new WeakMap()
+
+    return function responseSchemaCompilerWithCache (opts) {
+      const { schema } = opts
+      const isObject = typeof schema === 'object' && schema !== null
+
+      if (isObject) {
+        const serializer = cache.get(schema)
+
+        if (serializer !== undefined) {
+          return serializer
+        }
+      }
+
+      const serializer = responseSchemaCompiler(fjsOpts, opts)
+
+      if (isObject) {
+        cache.set(schema, serializer)
+      }
+
+      return serializer
+    }
   }
 }
 
